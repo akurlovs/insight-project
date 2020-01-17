@@ -12,7 +12,7 @@ My hope is that my Insight project can serve as an inspiration for increasing tr
 I will collect data from [The Bureau of Labor Statistics](https://www.bls.gov/data/) and [The Census Bureau](https://www.census.gov/data.html), among other sources.
 
 # Tech Stack
-Data will be imported into [Amazon S3](https://aws.amazon.com/s3/) and batched-processed into a [PostreSQL](https://www.postgresql.org/) using [Apache Spark](https://spark.apache.org/). Plotting will be accomplished using software that will allow me to overlay a map of the U.S. (have not figured out which one yet; suggestions appreciated).
+Data will be imported into [Amazon S3](https://aws.amazon.com/s3/) and batched-processed into a [PostgreSQL](https://www.postgresql.org/) using [Apache Spark](https://spark.apache.org/). Plotting will be accomplished using software that will allow me to overlay a map of the U.S. (have not figured out which one yet; suggestions appreciated).
 
 # Engineering Challenge
 I anticipate several challenges in the course of this project. First, the data come from diverse schemas, and I will need to use a bit of ingenuity to figure out how to combine it effeciently and intelligently. Second, some of the data (for example, industry descriptions) can be redundant and generally don't come in a neat fashion. Third, the database needs to be updated regularly as the Bureau of Labor, for instance, releases some data monthly and other data quarterly.
