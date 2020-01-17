@@ -21,5 +21,5 @@ I anticipate several challenges in the course of this project. First, the data c
 Minimally, I will build an infrastructure to easily locate industry and population microbursts across the country.
 
 # Stretch Goals
-In an ideal world, this would grow into a general platform for easiero access to government research.
+In an ideal world, this would grow into a general platform for easier access to government research.
 
