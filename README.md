@@ -14,7 +14,7 @@ My Data Enginering Project for Insight
 [Stretch Goals](#Stretch-Goals)
 
 
-## <a name="Introduction-Rationale"></a>T Introduction + Rationale
+## <a name="Introduction-Rationale"></a>Introduction + Rationale
 Metro areas that grow "organically" can be negatively impacted by rapid growth -- take, for instance, the Bay Area that suffers from astronomically high rents and homelessness, or the chronic and seemingly unsolvable traffic problems in Los Angeles. These issues can be offset by developing other metros and even rural areas in a smart, data-driven way. The U.S. government does an excellent job collecting the kinds of data that can help make those decisions. However, much of that data is fragmented and is not accessible in a comprehensive, user-friendly way. 
 
 My system will help investors identify metros and other regions of the country that have experienced notable recent growth and/or are local industry leaders. The system will be designed to be scalable and absorb incoming new data, as investors may also be interested in other variables such as the local government's investement in infrastructure or the fraction of the population that is young and educated.
