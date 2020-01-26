@@ -2,10 +2,15 @@
 My Data Enginering Project for Insight
 
 [Introduction + Rationale](#Introduction-Rationale)
+
 [Data](#Data)
+
 [Tech Stack](#Tech-Stack)
+
 [Engineering Challenge](#Engineering-Challenge)
+
 [MVP](#MVP)
+
 [Stretch Goals](#Stretch-Goals)
 
 
