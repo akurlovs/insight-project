@@ -16,7 +16,7 @@ My system will help investors identify metros and other regions of the country t
 
 My hope is that my Insight project can serve as an inspiration for increasing transparancy and exchange of ideas that can lead to creating sustainable prosperity.
 
-## Data 
+## Data
 I will collect data from [The Bureau of Labor Statistics](https://www.bls.gov/data/) and [The Census Bureau](https://www.census.gov/data.html), among other sources.
 
 ## Tech Stack
