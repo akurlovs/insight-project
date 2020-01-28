@@ -15,5 +15,5 @@ def listFD(url):
 for filey in listFD(url):
     if len(filey.split("/")[-1].split(".")[-1]) > 0:
         filey_out = filey.split("/")[-1]
-        print(f"wget -qO- {filey} | aws s3 cp - s3://{bucket}/{filey_out}")
+        print(f"wget -qO- {filey} | sed 's/ //g' - | aws s3 cp - s3://{bucket}/{filey_out}")
         subprocess.call(f"wget -qO- {filey} | sed 's/ //g' - | aws s3 cp - s3://{bucket}/{filey_out}", shell=True)
