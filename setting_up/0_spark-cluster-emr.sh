@@ -5,7 +5,7 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=us-west-2
 
 # IMPORT MONTHLY DATA
-python import_montly.py https://download.bls.gov/pub/time.series/sm/monthly-dump
+python /home/kurlovs/Dropbox/andre/insight/labor_project/import_monthly.py https://download.bls.gov/pub/time.series/sm/ monthly-dump
 
 # First, need to give your IAM account administratinve and EMR privileges
 ## RUN THIS TO MAKE SURE THE ROLES HAVE BEEN CREATED FOR IAM USER OR IT WON'T WORK
@@ -24,7 +24,7 @@ aws emr create-cluster \
 # I SHOULD EITHER MAKE THE PYTHON FILE PYTHON 2 -COMPATIBLE
 # OR ALTERNATIVELY, BOOTSTRAP EMR TO DEFAULT TO 3
 
-# generate a bash script
+# generate bash scripts to import and unzip files
 python /home/kurlovs/Dropbox/andre/insight/labor_project/import_quarterly.py \
        https://www.bls.gov/cew/downloadable-data-files.htm \
        https://www.bls.gov/cew/data/files qtrly_by_area \
@@ -34,9 +34,11 @@ python /home/kurlovs/Dropbox/andre/insight/labor_project/import_quarterly.py \
 # ssh to cluster
 ssh -i /home/kurlovs/Dropbox/andre/insight/amazon/andre-IAM-keypair.pem hadoop@ec2-34-222-156-167.us-west-2.compute.amazonaws.com
     
-# copy the bash script to cluster
+# copy the import bash script to cluster
 aws s3 cp /home/kurlovs/Dropbox/andre/insight/labor_project/import_quarterly.sh s3://quarterly-dump/
 
-# on emr cluster, run this
+# on emr cluster, run this to import quarterly files
 aws s3 cp s3://quarterly-dump/import_quarterly.sh .
 bash import_quarterly.sh
+
+# run the unzip scrips
