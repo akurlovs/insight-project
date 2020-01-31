@@ -18,5 +18,5 @@ for filey in listFD(url):
         print(f"processing {filey}")
         if len(filey_out.split(".")) == 2:
             subprocess.call(f"wget -qO- {filey} | aws s3 cp - s3://{bucket}/{filey_out}", shell=True)
-        #if len(filey_out.split(".")) > 2:
-        #    subprocess.call(f"wget -qO- {filey} | sed 's/ //g' - | aws s3 cp - s3://{bucket}/{filey_out}", shell=True)
+        if len(filey_out.split(".")) > 2:
+            subprocess.call(f"wget -qO- {filey} | sed 's/ //g' - | aws s3 cp - s3://{bucket}/{filey_out}", shell=True)
