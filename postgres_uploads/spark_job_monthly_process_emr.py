@@ -88,15 +88,16 @@ user_log.createOrReplaceTempView("monthly_data")
 
 processed_data = [parse_monthly_string(i.series_id, "state", 
                                       "area", "supersector",
-                                      "industry", "data_type")+tuple(["MSA", int(i.year), int(i.period[1:]), 
-                                                                 float(i.value)])
+                                      "industry", "data_type")+tuple(["MSA", int(f"{i.year}{i.period[1:]}"), 
+                                                                 round(float(i.value), 3)])
                                        for i in spark.sql('''SELECT series_id,year,period,value
                                                             FROM monthly_data 
                                                             WHERE footnote_codes IS NULL
+                                                            AND period != 'M13'
                                                           ''').collect()]
 
 new_header = ["state", "area", "supersector", "industry",
-              "datatype", "area_type", "year", "month", "value"]
+              "datatype", "area_type", "date", "value"]
 
 rdd_monthly = spark.sparkContext.parallelize(processed_data)
 df_monthly = rdd_monthly.toDF(new_header)
@@ -108,14 +109,13 @@ df_monthly.createOrReplaceTempView("processed_monthly_data")
 df_monthly.write.jdbc(url='jdbc:postgresql://postgres.cm6tnfe8mefq.us-west-2.rds.amazonaws.com:5432/postgres',
                     table='monthly',
                     mode='overwrite',
-                    properties={'user':'postgres','password':'SterlingArcher69',
+                    properties={'user':'postgres','password':'my_password',
                                 'driver': 'org.postgresql.Driver'})
-
 
 # VERIFY UPLOAD
 jdbcDF = spark.read.jdbc(url='jdbc:postgresql://postgres.cm6tnfe8mefq.us-west-2.rds.amazonaws.com:5432/postgres',
                          table='monthly',
-                         properties={'user':'postgres','password':'SterlingArcher69',
+                         properties={'user':'postgres','password':'my_password',
                                 'driver': 'org.postgresql.Driver'})
 
 
