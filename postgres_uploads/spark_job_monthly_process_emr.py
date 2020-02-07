@@ -90,7 +90,7 @@ user_log.createOrReplaceTempView("monthly_data")
 
 processed_data = [parse_monthly_string(i.series_id, "state", 
                                       "area", "supersector",
-                                      "industry", "data_type")+tuple(["MSA", datetime.strptime(f"{i.period[1:]}/15/{i.year}",
+                                      "industry", "data_type")+tuple(["msa", datetime.strptime(f"{i.period[1:]}/15/{i.year}",
                                                                      '%m/%d/%Y'), round(float(i.value), 3)])
                                        for i in spark.sql('''SELECT series_id,year,period,value
                                                             FROM monthly_data 
