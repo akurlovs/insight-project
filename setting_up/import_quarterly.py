@@ -8,8 +8,6 @@ import sys
 # IF THIS SCRIPT WERE TO BE USED FOR ANOTHER PAGE
 # AND GENERATED SHELL SCRIPT TO BE RUN IN THE EMR INSTANCE
 # TO IMPORT ALL THE FILES
-# CAN DO THIS DIRECTLY, BUT EMR RUNS PYTHON 3
-# AND I DON'T HAVE TO FIGURE OUT HOW TO BOOTSTRAP 3 ON IT
 
 url_0 = sys.argv[1] #'https://www.bls.gov/cew/downloadable-data-files.htm'
 url_1 = sys.argv[2] # https://www.bls.gov/cew/data/files
