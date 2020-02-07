@@ -3,6 +3,7 @@
 
 from pyspark.sql import SparkSession
 import subprocess
+from datetime import datetime
 
 ### THE FILES TO BE USED, IE THE GLOBALS
 
@@ -86,10 +87,11 @@ user_log.printSchema()
 
 user_log.createOrReplaceTempView("monthly_data")
 
+
 processed_data = [parse_monthly_string(i.series_id, "state", 
                                       "area", "supersector",
-                                      "industry", "data_type")+tuple(["MSA", int(f"{i.year}{i.period[1:]}"), 
-                                                                 round(float(i.value), 3)])
+                                      "industry", "data_type")+tuple(["MSA", datetime.strptime(f"{i.period[1:]}/15/{i.year}",
+                                                                     '%m/%d/%Y'), round(float(i.value), 3)])
                                        for i in spark.sql('''SELECT series_id,year,period,value
                                                             FROM monthly_data 
                                                             WHERE footnote_codes IS NULL
