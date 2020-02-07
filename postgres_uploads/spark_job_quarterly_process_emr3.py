@@ -125,11 +125,11 @@ def industry_split(industry_in):
        for now, extracts name only'''
     ind_split = industry_in.split(" ")
     output = []
+    
+    naics_code = ind_split[1]
 
     if ("NAICS" in ind_split and 
         naics_code not in PROCESS_NAICS["supersector"]["duplicates"]):
-
-        naics_code = ind_split[1]
 
         industry = " ".join(ind_split[2:])
 
