@@ -1,5 +1,5 @@
-# insight-project
-My Data Enginering Project for Insight
+# Burst!
+### Exploring investment-worthy growth patterns across the U.S.
 
 [Introduction + Rationale](#Introduction-Rationale)
 
