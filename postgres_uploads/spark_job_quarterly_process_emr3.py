@@ -194,7 +194,7 @@ def spark_process_file(input_files):
                 df_monthly.write.jdbc(url='jdbc:postgresql://postgres.cm6tnfe8mefq.us-west-2.rds.amazonaws.com:5432/postgres',
                                     table='quarterly',
                                     mode='append',
-                                    properties={'user':'postgres','password':'SterlingArcher69',
+                                    properties={'user':'postgres','password':'my_password',
                                                 'driver': 'org.postgresql.Driver'})
 
 
