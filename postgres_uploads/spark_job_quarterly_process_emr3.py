@@ -26,6 +26,7 @@ def process_naics(naics_file):
     naics_dict = {}
     naics_dict["supersector"] = {}
     naics_dict["subsector"] = {}
+    naics_dict["industry"] = {}
 
     # KEEP TRAck of duplicate categories
     naics_dict["supersector"]["duplicates"] = set()
@@ -45,6 +46,7 @@ def process_naics(naics_file):
                 naics_dict["supersector"]["duplicates"].add(category)
             else:
                 check[category[:2]].add(industry)
+                naics_dict["industry"][category] = industry 
 
             if len(category) <= 3 or "-" in category:
                 if len(category) == 3:
@@ -120,23 +122,16 @@ def csa_msa_county_split(area_in):
     return(tuple(output))
 
 
-def industry_split(industry_in):
-    '''Splits industry...
+def industry_split(naics_code):
+    '''Splits industr...
        for now, extracts name only'''
-    ind_split = industry_in.split(" ")
     output = []
-    
-    naics_code = ind_split[1]
+    naics_code = str(naics_code)
 
-    if ("NAICS" in ind_split and 
-        naics_code not in PROCESS_NAICS["supersector"]["duplicates"]):
-
-        industry = " ".join(ind_split[2:])
+    if naics_code not in PROCESS_NAICS["supersector"]["duplicates"]:
 
         if naics_code[:2] in PROCESS_NAICS['supersector']:
             output.append(PROCESS_NAICS['supersector'][naics_code[:2]])
-        else:
-            output.append("")
 
         if naics_code[:3] in PROCESS_NAICS['subsector']:
             output.append(PROCESS_NAICS['subsector'][naics_code[:3]])
@@ -144,13 +139,10 @@ def industry_split(industry_in):
             if ((len(naics_code) == 2 or "-" in naics_code) and
                 (naics_code[:2] in PROCESS_NAICS['supersector'])):
                 output.append(f"{PROCESS_NAICS['supersector'][naics_code[:2]]}")
-            else:
-                output.append("")
+ 
+        if naics_code in PROCESS_NAICS['industry']:
+            output.append(f"{PROCESS_NAICS['industry'][naics_code]}")
 
-        output.append(industry)
-        
-    else:
-        output = ["", "", ""]
     output = [i.lower() for i in output]
     output = [i.replace("-", " ") for i in output]
 
@@ -172,7 +164,7 @@ def spark_process_file(input_files):
 
             user_log.createOrReplaceTempView("quarterly_data")
 
-            processed_frame = spark.sql('''SELECT year,qtr AS quarter,area_title AS area,industry_title AS industry,
+            processed_frame = spark.sql('''SELECT year,qtr AS quarter,area_title AS area,industry_code AS industry,
                                 (month1_emplvl+month2_emplvl+month3_emplvl)/3000.0 AS employees
                                 FROM quarterly_data
                                 WHERE own_title="Private" AND
@@ -181,14 +173,14 @@ def spark_process_file(input_files):
                                 month2_emplvl IS NOT NULL AND
                                 month3_emplvl IS NOT NULL
                                 ''').collect()
-            
+
 
             processed_data = [csa_msa_county_split(i.area)+industry_split(i.industry)+
                                   tuple([datetime.strptime(f"0{j[1]*3-1}/15/{j[0]}", '%m/%d/%Y') if i.quarter < 4 else 
                                         datetime.strptime(f"{j[1]*3-1}/15/{j[0]}", '%m/%d/%Y')
                                          for j in zip([i.year], [i.quarter])])+
                                   tuple([round(i.employees, 3)])
-                                  for i in processed_frame if industry_split(i.industry).count("") == 0 ]
+                                  for i in processed_frame if len(industry_split(i.industry)) == 3 ]
 
             if len(processed_data) > 0:
 
@@ -202,7 +194,7 @@ def spark_process_file(input_files):
                 df_monthly.write.jdbc(url='jdbc:postgresql://postgres.cm6tnfe8mefq.us-west-2.rds.amazonaws.com:5432/postgres',
                                     table='quarterly',
                                     mode='append',
-                                    properties={'user':'postgres','password':'mypassword',
+                                    properties={'user':'postgres','password':'SterlingArcher69',
                                                 'driver': 'org.postgresql.Driver'})
 
 
