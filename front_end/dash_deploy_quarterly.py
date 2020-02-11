@@ -14,7 +14,7 @@ from math import log
 con = psycopg2.connect("dbname='postgres' \
                         user='postgres' \
                         host='postgres.cm6tnfe8mefq.us-west-2.rds.amazonaws.com' \
-                        password='SterlingArcher69'")
+                        password='my_password'")
 
 MONTHS_DICT = {'1st Quarter' : '02',
                '2nd Quarter' : '05',
