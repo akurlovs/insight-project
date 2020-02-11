@@ -113,7 +113,7 @@ def csa_msa_county_split(area_in):
     else:
         if "District of Columbia" in area_in:
             area = "Washington, DC"
-            state = "DC"
+            state = STATES["DC"]
         else:
             area =  area_in #" ".join(area_in.split(", ")[0].split(" ")[:-1])
             state = area_in.split(", ")[1]
