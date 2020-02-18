@@ -13,7 +13,7 @@
 
 
 ## <a name="Introduction-Rationale"></a>Introduction + Rationale
-This project helps identify metros and other regions of the country that have experienced notable recent growth in particulr industries.
+This project helps identify metros and other regions of the country that have experienced growth in particular industries.
 
 ## <a name="Data"></a>Data
 Monthly and quarterly data from [The Bureau of Labor Statistics](https://www.bls.gov/data/)
