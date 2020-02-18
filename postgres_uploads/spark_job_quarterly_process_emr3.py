@@ -7,7 +7,7 @@ from datetime import datetime
 ### THE FILES TO BE USED IE THE GLOBALS
 INPUT_ZIP_PREFIX = "_qtrly_by_area.zip"
 INPUT_BUCKET = "s3://quarterly-dump/"
-INPUT_YEARS = range(2019,2020) # years to copy!
+INPUT_YEARS = range(2006,2020) # years to copy!
 HOME_DIR = "/home/hadoop/"
 NAICS_FILE = "/home/hadoop/NAICS_2017.txt"
 
@@ -52,8 +52,8 @@ def process_naics(naics_file):
                 if len(category) == 3:
                     naics_dict["subsector"][category] = industry
                 else:                     
-                    for cats in category.split("-"):
-                        naics_dict["supersector"][cats] = industry
+                    for cats in range(int(category.split("-")[0]), int(category.split("-")[-1])+1):
+                        naics_dict["supersector"][str(cats)] = industry
     return(naics_dict)
 
 
