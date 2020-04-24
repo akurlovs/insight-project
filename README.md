@@ -11,6 +11,8 @@
 
 [Stretch Goals](#Stretch-Goals)
 
+[Front End Screencast](#Front-End)
+
 
 ## <a name="Introduction-Rationale"></a>Introduction + Rationale
 This project helps identify metros and other regions of the country that have experienced growth in particular industries, and thus helps connect potential investors (and also employees!) to the places where the industry is located.
@@ -27,3 +29,6 @@ The source data is hard to query for specific information. Also, some of the dat
 ## <a name="Stretch-Goals"></a>Stretch Goals
 In an ideal world, this would grow into a general platform for easier access to government research.
 
+## <a name="Front-End"></a>Front End
+
+<video src="front_end/screencast.mp4" width="320" height="200" controls preload></video>
